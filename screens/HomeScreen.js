@@ -10,7 +10,22 @@ export default class HomeScreen extends React.Component {
                         Message Options
                     </Text>
                 </View>
-                
+                <TouchableOpacity 
+                    style={styles.loginBtn}
+                    onPress={() => {
+                    this.props.navigation.navigate('SendMessage')
+                    }}>
+                    <Text style={styles.loginText}>Send a Message</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={styles.loginBtn}
+                    onPress={() => {
+                    console.log('Button Clicked')
+                    this.props.navigation.navigate('ScheduleMessage')
+                    }}>
+                    <Text style={styles.loginText}>Schedule Message</Text>
+                </TouchableOpacity>
                
             </View>
         )
