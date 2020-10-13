@@ -14,6 +14,58 @@ export default class NewInstantMessage extends React.Component {
         items: []
     }
 
+    sendMessage =  () => {
+        console.log(value)
+        let data = {
+            "message":this.state.message,
+            "channelId":this.state.channelId,
+            "sender":this.state.selectedValue
+        }
+        console.log(data)
+        if (value !== null) {
+            // Initialize API instance forcollart.com APIs
+            let apiUser = create({
+                baseURL: "http://9fda39342a36.ngrok.io",
+                headers: {
+                    'Authorization': 'Bearer '+value
+                }
+            });
+            let messageRequest = async () => {
+                // let formData = new FormData();
+                // formData.append("email", email);
+                // formData.append("pw", password);
+                try {
+                    const response = await apiUser.post('/send-message', data);
+                   console.log(response);
+                } catch (e) {
+                    console.error("[API] login :", e);
+                    return e;
+                }
+            }
+            messageRequest()
+            // fetch('http://9fda39342a36.ngrok.io/send-message', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Authorization': 'Bearer '+value
+            //     },
+            //     body: JSON.stringify({
+            //         "message":this.state.message,
+            //         "channelId":this.state.channelId,
+            //         "sender":this.state.selectedValue
+            //     })
+            // })
+            // .then(function(response) {
+            //     return response.json();
+            // })
+            // .then(function(data) {
+            //     console.log('Getting after sending message', data);
+            // })
+            // .catch(error => {
+            //     console.log('Error occured',error)
+            // });
+        }
+            }
+
     async componentDidMount(){
         try {
             value = await AsyncStorage.getItem('Token')
