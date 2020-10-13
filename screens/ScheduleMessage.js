@@ -19,6 +19,34 @@ export default class ScheduleMessage extends React.Component {
         time: new Date(),
     }
 
+    async componentDidMount(){
+        try {
+            value = await AsyncStorage.getItem('Token')
+            console.log(value)
+            // Parth's API
+            fetch('http://9fda39342a36.ngrok.io/conversation-list', {
+                method: 'GET',
+                headers: {
+                'Authorization': 'Bearer '+value
+                },
+            })
+            .then((response) =>  {
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Getting conversations', data);
+                this.setState({...this.state, conversations:data.data})
+            })
+            .catch(error => {
+                console.log('Error occured while fetching conversation',error)
+            });
+            // renderConversations(value)
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
     render(){
         return(
             <View style={styles.container}>
