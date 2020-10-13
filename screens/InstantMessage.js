@@ -92,3 +92,21 @@ const styles = StyleSheet.create({
         marginHorizontal: 50
       },
   });
+
+  const pickerStyle = {
+    inputIOS: {
+        color: 'white',
+        paddingHorizontal: 10,
+        backgroundColor: 'red',
+        borderRadius: 5,
+    },
+    placeholder: {
+        color: 'black',
+      },
+    inputAndroid: {
+        color: 'black',
+        paddingHorizontal: 10,
+        backgroundColor: 'white',
+        borderRadius: 5,
+    },
+};
