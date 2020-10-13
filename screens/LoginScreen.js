@@ -29,7 +29,22 @@ export default class LoginScreen extends React.Component {
         ]
         return (
           <View style={styles.container}>
-              <TouchableOpacity 
+            <Modal
+            transparent={true}
+            animationType = {"fade"} 
+            visible={this.state.modalVisible}
+            onRequestClose = {() =>{ this.toggleModal(false) } }>
+              <View style={{backgroundColor: "#000000aa", flex:1}}>
+                <View style={{backgroundColor:"#fff", margin:20, borderRadius:10, flex:1}}>
+                  <WebView source={{ uri: `https://slack.com/oauth/v2/authorize?user_scope=${encodeURIComponent(scopes)}&client_id=${clientId}"` }}
+                    onNavigationStateChange={this.handleWebViewNavigationStateChange}
+                  />
+                </View>
+              </View>
+          </Modal>
+              
+            <Text style={styles.logo}>Slack ChatBot</Text>
+            <TouchableOpacity 
           style={styles.loginBtn}
           onPress={() => {
             console.log('Button Clicked')
@@ -39,7 +54,6 @@ export default class LoginScreen extends React.Component {
             }}>
           <Text style={styles.loginText}>Login With Slack</Text>
         </TouchableOpacity>
-            <Text style={styles.logo}>Slack ChatBot</Text>
           </View>
         );
       }
@@ -57,6 +71,23 @@ export default class LoginScreen extends React.Component {
         fontSize:50,
         color:"#fb5b5a",
         marginBottom:40
+      },loginText:{
+        color:"white",
+        fontSize:15
       },
+      loginBtn:{
+        width:"80%",
+        backgroundColor:"#fb5b5a",
+        borderRadius:25,
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:40,
+        marginBottom:10
+      },
+      modal: {
+        justifyContent: 'center',  
+        alignItems: 'center',   
+      }
       
     });
