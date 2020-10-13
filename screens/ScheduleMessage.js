@@ -19,6 +19,20 @@ export default class ScheduleMessage extends React.Component {
         time: new Date(),
     }
 
+    showDatePicker = () => {
+        this.setState({...this.state,isDatePickerVisible:true});
+      };
+    
+    hideDatePicker = () => {
+        this.setState({...this.state,isDatePickerVisible:false});
+      };
+    
+    handleConfirm = (date) => {
+        console.log("A date has been picked: ", date);
+        this.setState({...this.state, time:date})
+        this.hideDatePicker();
+      };
+
     async componentDidMount(){
         try {
             value = await AsyncStorage.getItem('Token')
