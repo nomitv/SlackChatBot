@@ -14,6 +14,53 @@ export default class LoginScreen extends React.Component {
         this.setState({modalVisible: visible})
       }
     
+      _storeData = (code) => {
+        let new_code=code
+  
+        // Parth's API
+        let data = {
+          "token" : new_code
+        }
+        console.log('This is being sent',new_code)
+        fetch('http://9fda39342a36.ngrok.io/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log('Getting data', data);
+          AsyncStorage.setItem(
+              'Token',
+              data.data.token
+            )
+            .then(() => {
+              console.log('Token Stored Successfully')
+            })
+            .catch(error => {
+              console.log('Error Occured while storing token', error)
+            })
+        })
+        .catch(error => {
+          console.log(error)
+        });
+    };
+
+    handleWebViewNavigationStateChange = newNavState => {
+    const { url } = newNavState;
+    if (url.includes(':3000')) {
+      let params = queryString.parse(url)
+      let code = params[Object.keys(params)[0]]
+      console.log('Printing the code',code)
+      this._storeData(code)
+      this.toggleModal(false)
+      this.props.navigation.navigate('Home')
+    }  
+  };
 
     render(){
         const clientId = '1364451180086.1366032718646'
