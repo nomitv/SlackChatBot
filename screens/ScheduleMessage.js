@@ -52,6 +52,25 @@ export default class ScheduleMessage extends React.Component {
                     <Picker.Item label="User" value="user" />
                     <Picker.Item label="Bot" value="bot" />
                 </Picker>
+                <Picker
+                    selectedValue={this.state.selectedType}
+                    style={{ marginTop: 30,height: 50, width: 150, backgroundColor: 'white', width: 300, marginBottom: 30}}
+                    onValueChange={(itemValue, itemIndex) => this.setState({...this.state,selectedType:itemValue})}
+                >
+                    <Picker.Item label="--Choose an option--" value="default" />
+                    <Picker.Item label="Specific Date and Time" value="null" />
+                    <Picker.Item label="Daily" value="daily" />
+                    <Picker.Item label="Weekly" value="weekly" />
+                    <Picker.Item label="Monthly" value="monthly" />
+                </Picker>
+
+                <Button title="Show Date Picker" onPress={this.showDatePicker} color={'#fb5b5a'} />
+                <DateTimePickerModal
+                    isVisible={this.state.isDatePickerVisible}
+                    mode="datetime"
+                    onConfirm={this.handleConfirm}
+                    onCancel={this.hideDatePicker}
+                />
 
                 <TouchableOpacity 
                     style={styles.loginBtn}
