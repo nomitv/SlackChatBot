@@ -34,6 +34,10 @@ export default class NewInstantMessage extends React.Component {
                     }}
                     items={this.state.conversations}
                 />
+                <TextInput style={{backgroundColor: 'white', marginTop: 30, borderRadius: 5, width: 300}} placeholder="Enter message" onChangeText={(e) =>{
+                    console.log(e)
+                    this.setState({...this.state,message:e})
+                }}/>
                 </View>
                 
             </View>
