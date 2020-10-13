@@ -20,7 +20,21 @@ export default class NewInstantMessage extends React.Component {
                 <Text style={styles.logo}>
                         Send Message
                 </Text>
-                
+                <View style={{
+                    borderRadius: 10,
+                    marginTop: 50,
+                    alignContent: 'center',
+                    justifyContent: 'center'
+                }}>
+                <RNPickerSelect 
+                    placeholderTextColor="white"
+                    style={pickerStyle}
+                    onValueChange={(value) => {console.log(value)
+                        this.setState({...this.state,channelId: value})
+                    }}
+                    items={this.state.conversations}
+                />
+                </View>
                 
             </View>
         )
