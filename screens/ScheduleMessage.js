@@ -19,6 +19,37 @@ export default class ScheduleMessage extends React.Component {
         time: new Date(),
     }
 
+    sendMessage =  () => {
+        console.log(value)
+        let data = {
+            "message":this.state.message,
+            "channelId":this.state.channelId,
+            "sender":this.state.selectedValue,
+            "time": this.state.time,
+            "messageType": this.selectedType
+        }
+        console.log(data)
+        if (value !== null) {
+            // Initialize API instance forcollart.com APIs
+            let apiUser = create({
+                baseURL: "http://9fda39342a36.ngrok.io",
+                headers: {
+                    'Authorization': 'Bearer '+value
+                }
+            });
+            let messageRequest = async () => {
+                try {
+                    const response = await apiUser.post('/schedule-message', data);
+                   console.log(response);
+                } catch (e) {
+                    console.error("[API] login :", e);
+                    return e;
+                }
+            }
+            messageRequest()
+        }
+            }
+
     showDatePicker = () => {
         this.setState({...this.state,isDatePickerVisible:true});
       };
