@@ -6,6 +6,15 @@ import axios from 'axios'
 import SlackLogin from 'react-native-slack-login'
 
 export default class LoginScreen extends React.Component {
+    state = {
+        modalVisible: false
+      }
+    
+      toggleModal(visible) {
+        this.setState({modalVisible: visible})
+      }
+    
+
     render(){
         const clientId = '1364451180086.1366032718646'
         const redirectUrl = 'http://localhost:3000/slack/redirect'
@@ -20,6 +29,16 @@ export default class LoginScreen extends React.Component {
         ]
         return (
           <View style={styles.container}>
+              <TouchableOpacity 
+          style={styles.loginBtn}
+          onPress={() => {
+            console.log('Button Clicked')
+            // this.props.navigation.navigate('Home')
+            this.toggleModal(true)
+            // this.slackLogin.show()
+            }}>
+          <Text style={styles.loginText}>Login With Slack</Text>
+        </TouchableOpacity>
             <Text style={styles.logo}>Slack ChatBot</Text>
           </View>
         );
