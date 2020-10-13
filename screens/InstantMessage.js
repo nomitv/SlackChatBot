@@ -47,6 +47,14 @@ export default class NewInstantMessage extends React.Component {
                     <Picker.Item label="User" value="user" />
                     <Picker.Item label="Bot" value="bot" />
                 </Picker>
+                <TouchableOpacity 
+                    style={styles.loginBtn}
+                    onPress={() => {
+                        console.log('Button Clicked')
+                        this.sendMessage()
+                }}>
+                    <Text style={styles.loginText}>Send</Text>
+                </TouchableOpacity>
                 </View>
                 
             </View>
