@@ -38,6 +38,15 @@ export default class NewInstantMessage extends React.Component {
                     console.log(e)
                     this.setState({...this.state,message:e})
                 }}/>
+                <Picker
+                    selectedValue={this.state.selectedValue}
+                    style={{ marginTop: 30,height: 50, width: 150, backgroundColor: 'white', width: 300}}
+                    onValueChange={(itemValue, itemIndex) => this.setState({...this.state,selectedValue:itemValue})}
+                >
+                    <Picker.Item label="--Choose an option--" value="default" />
+                    <Picker.Item label="User" value="user" />
+                    <Picker.Item label="Bot" value="bot" />
+                </Picker>
                 </View>
                 
             </View>
